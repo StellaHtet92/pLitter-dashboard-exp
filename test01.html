@@ -26,7 +26,7 @@
         <div id="container">
             <div id="map">
             </div>
-            <iframe width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+            <iframe id="IPlayer" width="420" height="315" src="" display="none"> <!-- base url: https://www.youtube.com/embed/your_video_name-->
             </iframe>
         </div>
     </body>
@@ -36,9 +36,9 @@
    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
    crossorigin="">
 </script>
-<script src='geojson1.js'></script>
+<script src='testGeoJson.js'></script>
 <script>
-    var map = L.map('map').setView([14.0785, 100.6140], 13);
+    var map = L.map('map').setView([10.0042388, 105.7902111], 13);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -48,7 +48,50 @@
     accessToken: 'pk.eyJ1IjoiaHRldHlhbWluIiwiYSI6ImNrZmRyYnpqMzAxOTEycXBhdXA3MnVpOTMifQ.FLWujZQkT6BeMcSIQz0a8Q'
 }).addTo(map);
 
-var myLayer = L.geoJSON().addTo(map);
-myLayer.addData(geojsonFeature);
-myLayer.addTo(map);
-</script>
+var geojsonMarkerOptions = {
+    radius: 8,
+    fillColor: "#ff0000",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
+function onEachFeature(feature, layer) {
+    // does this feature have a property named popupContent?
+  //  if (feature.properties && feature.properties.name) {
+        
+  //  }
+   //bind click
+   layer.on('click', function (e) {
+      // e = event
+      console.log("e");
+      console.log(e);
+      var name=feature.properties.name.slice(0, 8);
+        console.log("Name:");
+        console.log(name);
+        //layer.bindPopup(feature.properties.name);
+       
+        if (name.localeCompare("GH010009") )
+        {
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/hgts0sn19oo';
+        }
+        else if (name.localeCompare("GH010016"))
+        {
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/rf2hyN3Kl9c';
+        }
+        else 
+        {
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/hgts0sn19oo';
+        }   
+        document.getElementById("IPlayer").style.display = 'true';
+        
+    });
+}
+L.geoJSON(geojsonfeature, {
+    pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, geojsonMarkerOptions);
+    }, 
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+</script> 
