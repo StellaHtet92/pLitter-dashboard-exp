@@ -6,8 +6,7 @@ var geojsonfeature={
         "geometry": {
           "type": "Point",
           "coordinates": [
-            105.7902111, 10.0042388
-            
+            105.7902111, 10.0042388            
           ]
         },
         "properties": {
@@ -24,8 +23,7 @@ var geojsonfeature={
         "geometry": {
           "type": "Point",
           "coordinates": [
-            105.79020919999999, 10.0042381
-            
+            105.79020919999999, 10.0042381            
           ]
         },
         "properties": {
