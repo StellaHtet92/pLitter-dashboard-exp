@@ -1,41 +1,37 @@
-let features = [];
+var geojson_array = [];
+Object.keys(geojsonFeature).forEach((video => {
+   //console.log(video);
+   //
+    var geojson = {"type": "FeatureCollection", "properties": {"video_path": geojsonFeature[video]["video_path"],"path_name":video}, "features": []};
+    //console.log(geojson);
+    geojsonFeature[video]["geom"].map((point) => {
+   // console.log(di);
+        geojson["features"].push({
+           "type": "Feature",
+           "geometry": {
+               "type": "Point",
+               "coordinates": [point["longitude"], point["latitude"]]
+           },
+           "properties": {
+               "name": point["name"],
+               "count": point["count"],
+               "Plastic": point["Plastic"],
+               "Pile": point["Pile"],
+               "Face mask": point["Face mask"],
+               "Trash bin": point["Trash bin"],
+           }
+       });
+    });
+    geojson_array.push(geojson);
+}))
 
- console.log(geojsonFeature);
-const output = geojsonFeature.branch_data.map((element) => {
-  var rdata = {
-    type: "Feature",
-    properties: {
-        Face_mask: element."Face mask",
-        Pile: element."Pile",
-        Plastic: element."Plastic",
-        Trash_bin:element."Trash bin",
-        count:element."count",
-        name:element."name"
-    },
-    geometry: {
-      type: "Point",
-      coordinates: [
-        parseFloat(element.longitude),
-        parseFloat(element.latitude),
-      ],
-    },
-  };
-     console.log(rdata);
-  features.push(rdata);
-});
 
-console.log(features);
-
-const geoJSON = {
-  type: "FeatureCollection",
-  features: features,
-};
-
-console.log(geoJSON);
+//console.log("geojson_array");
+//console.log(geojson_array);
 
 $(".download-geojson-btn").click(function () {
   requiredData =
     "data:text/json;charset=utf-8," +
-    encodeURIComponent(JSON.stringify(geoJSON));
+    encodeURIComponent(JSON.stringify(geojson_array));
   $(this).attr("href", requiredData);
 });

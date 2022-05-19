@@ -36,7 +36,8 @@
    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
    crossorigin="">
 </script>
-<script src='testGeoJson.js'></script>
+<script src='geojson1.js'></script>
+<script src='convertplitter2geojson.js'></script>
 <script>
     var map = L.map('map').setView([10.0042388, 105.7902111], 13);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -49,7 +50,7 @@
 }).addTo(map);
 
 var geojsonMarkerOptions = {
-    radius: 8,
+    radius: 1,
     fillColor: "#ff0000",
     color: "#000",
     weight: 1,
@@ -57,36 +58,114 @@ var geojsonMarkerOptions = {
     fillOpacity: 0.8
 };
 function onEachFeature(feature, layer) {
+  
     layer.on('click', function (e) {
+        console.log("layer");
+    console.log(layer);
       // e = event
-      console.log("e");
-      console.log(e);
+      console.log("feature");
+      console.log(feature);
       var name=feature.properties.name.slice(0, 8);
+      var id_Picture=feature.properties.name.slice(9, 10);
+      var max=0;
         console.log("Name:");
         console.log(name);
+        console.log("id_Picture:");
+        console.log(id_Picture);
+        var player=document.getElementById('IPlayer');
         //layer.bindPopup(feature.properties.name);
-       
+        //link to download videos=>https://street.plitter.org/media/Can%20Tho/January_2022/your_path_name.MP4
+        //<iframe allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/UkWd0azv3fQ?start=90" width="420"></iframe>
         if (name.localeCompare("GH010009") )
         {
-            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/hgts0sn19oo';
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/hgts0sn19oo'+'?start='+id_Picture;
+            max= getMax(name);
+            console.log("Max of Feature of that route:");
+            console.log(max);
+
         }
         else if (name.localeCompare("GH010016"))
         {
-            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/rf2hyN3Kl9c';
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/rf2hyN3Kl9c'+'?start='+id_Picture;
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+           
+        }
+        else if (name.localeCompare("GH010027"))
+        {
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/XnL-B1rnJfc'+'?start='+id_Picture;
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+            
+        }
+        else if (name.localeCompare("GH010025"))
+        {
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/p82Om_A9f7g'+'?start='+id_Picture;
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+           
+        }
+       
+       else if (name.localeCompare("GH010021"))
+        {
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/GQix07cCRSQ'+'?start='+id_Picture;
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+           
+        }
+        //https://youtu.be/JnN-gL3zKHk
+        else if (name.localeCompare("GH030030"))
+        {
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/JnN-gL3zKHk'+'?start='+id_Picture;
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+           
         }
         else 
         {
-            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/hgts0sn19oo';
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/hgts0sn19oo'+'?start='+id_Picture;
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+            
+            
         }   
         document.getElementById("IPlayer").style.display = 'true';
+       
         
     });
 }
-L.geoJSON(geojsonfeature, {
+L.geoJSON(geojson_array, {
     pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, geojsonMarkerOptions);
     }, 
     onEachFeature: onEachFeature
 }).addTo(map);
+
+function getMax(name) {
+    var max = -10000000;
+  
+    for (var i=0 ; i<geojson_array.length ; i++) {
+        console.log(geojson_array[i].properties.path_name);
+        if(geojson_array[i].properties.path_name.localeCompare(name))
+        {
+           feat=geojson_array[i];
+           console.log("feature (geojson_array)");
+           console.log(feat); 
+           break;
+        }
+        
+    }    
+    console.log("feat.features.length");
+    console.log(parseInt(feat.features.length));
+    max=parseInt(feat.features.length);
+    
+    return max;
+}
 
 </script> 
