@@ -162,6 +162,8 @@
         var valueField = this.cfg.valueField || 'value';
       
         // transform data to latlngs
+        console.log("Data length from leaflet-heatmap");
+        console.log(data.length);
         var data = data.data;
         var len = data.length;
         var d = [];

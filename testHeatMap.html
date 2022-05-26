@@ -36,7 +36,9 @@
    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
    crossorigin="">
 </script>
-<script src='leaflet-heatmap.js'></script>
+<script src='leaflet-heatmap/heatmap.js'></script>
+<script src='leaflet-heatmap/leaflet-heatmap.js'></script>
+<script src="testHeatMapData.js"></script>
 <!--geojson1 is the selection of geojson features which have uploaded youtube-video-->
 <script src='geojson1.js'></script>
 <script src='convertplitter2geojson.js'></script>
@@ -75,64 +77,74 @@ function onEachFeature(feature, layer) {
         console.log(name);
         console.log("id_Picture:");
         console.log(id_Picture);
+        var time=Math.round(id_Picture*2.2);
+        console.log("Time");
+        console.log(time);
         var player=document.getElementById('IPlayer');
         //layer.bindPopup(feature.properties.name);
         //link to download videos=>https://street.plitter.org/media/Can%20Tho/January_2022/your_path_name.MP4
         //<iframe allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/UkWd0azv3fQ?start=90" width="420"></iframe>
         if (name.localeCompare("GH010009")==0 )
         {
-            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/hgts0sn19oo'+'?start='+id_Picture;
-            max= getMax(name);
-           console.log("Max of Feature of that route:");
-           console.log(max);
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/hgts0sn19oo?start='+time;
+           // loadVideoById("hgts0sn19oo", time, "large")
+            //max= getMax(name);
+           //console.log("Max of Feature of that route:");
+           //console.log(max);
 
         }
         else if (name.localeCompare("GH010016")==0)
         {
-            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/rf2hyN3Kl9c'+'?start='+id_Picture;
-            max= getMax(name);
-            console.log("Max of Feature of that route:");
-            console.log(max);
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/rf2hyN3Kl9c?start='+time;
+            //loadVideoById("rf2hyN3Kl9c", time, "large")
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
            
         }
         else if (name.localeCompare("GH010021")==0)
         {
-            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/GQix07cCRSQ'+'?start='+id_Picture;
-            max= getMax(name);
-            console.log("Max of Feature of that route:");
-            console.log(max);
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/GQix07cCRSQ?start='+time;
+            //loadVideoById("GQix07cCRSQ", time, "large")
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
            
         }
         else if (name.localeCompare("GH010022")==0)
         {
-            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/EBMiR8Z3gR4'+'?start='+id_Picture;
-            max= getMax(name);
-            console.log("Max of Feature of that route:");
-            console.log(max);
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/EBMiR8Z3gR4?start='+time;
+           // loadVideoById("EBMiR8Z3gR4", time, "large")
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
            
         }
         else if (name.localeCompare("GH010025")==0)
         {
-            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/p82Om_A9f7g'+'?start='+id_Picture;
-            max= getMax(name);
-            console.log("Max of Feature of that route:");
-            console.log(max);
+           document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/p82Om_A9f7g?start='+time;
+           //loadVideoById("p82Om_A9f7g", time, "large")
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
            
         }
         else if (name.localeCompare("GH010027")==0)
         {
-            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/XnL-B1rnJfc'+'?start='+id_Picture;
-            max= getMax(name);
-            console.log("Max of Feature of that route:");
-            console.log(max);
+           document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/XnL-B1rnJfc?start='+time;
+           //loadVideoById("XnL-B1rnJfc", time, "large")
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
             
         }
         else if (name.localeCompare("GH010028")==0)
         {
-            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/XvpN5_-vgr0'+'?start='+id_Picture;
-            max= getMax(name);
-            console.log("Max of Feature of that route:");
-            console.log(max);
+           document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/XvpN5_-vgr0?start='+time;
+           //loadVideoById("XvpN5_-vgr0", time, "large")
+           //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
             
         }
             
@@ -140,21 +152,22 @@ function onEachFeature(feature, layer) {
         //https://youtu.be/JnN-gL3zKHk
         else if (name.localeCompare("GH030030")==0)
         {
-            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/JnN-gL3zKHk'+'?start='+id_Picture;
-            max= getMax(name);
-            console.log("Max of Feature of that route:");
-            console.log(max);
+            
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/JnN-gL3zKHk?start='+time;
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
            
         }
-        // else 
-        // {
-        //     document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/hgts0sn19oo'+'?start='+id_Picture;
-        //     //max= getMax(name);
-        //     //console.log("Max of Feature of that route:");
-        //     //console.log(max);
+        else 
+        {
+            //document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/hgts0sn19oo'+'?start='+id_Picture;
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            window.alert('Video not found');
+            document.getElementById("IPlayer").style.display = 'hidden';
             
-            
-        // }   
+        }   
         document.getElementById("IPlayer").style.display = 'true';
        
         
@@ -185,8 +198,11 @@ var cfg = {
   // which field name in your data represents the data value - default "value"
   valueField: 'count'
 };
+
 var heatmapLayer = new HeatmapOverlay(cfg).addTo(map);
-heatmapLayer.setData(geojson_array);
+//console.log("geoJSON Array");
+//console.log(geojson_array)
+heatmapLayer.setData(testData);
 
 function getMax(name) {
     var max = -10000000;
