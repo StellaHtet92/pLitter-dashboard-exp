@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Test Page</title>
+        <style>
+            #map { height: 100vh; 
+            margin:0;
+            position: relative;
+            z-index: 1;
+            }
+            iframe {    
+              
+                position: relative;
+                z-index: 2;   
+                top:-420px;
+                left:50px;
+            }
+        </style>
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+         integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+         crossorigin=""/>
+    </head>
+    <body>
+        <div id="container">
+            <div id="map">
+            </div>
+            <iframe id="IPlayer" width="420" height="315" src="" display="none"> <!-- base url: https://www.youtube.com/embed/your_video_name-->
+            </iframe>
+        </div>
+    </body>
+</html>
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+   crossorigin="">
+</script>
+<script src='leaflet-heatmap/heatmap.js'></script>
+<script src='leaflet-heatmap/leaflet-heatmap.js'></script>
+<!--<script src="testHeatMapData.js"></script>-->
+<!--geojson1 is the selection of geojson features which have uploaded youtube-video-->
+<script src='geojson1.js'></script>
+<script src='convertplitter2geojson.js'></script>
+
+<script>
+    var map = L.map('map').setView([10.0042388, 105.7902111], 13);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoiaHRldHlhbWluIiwiYSI6ImNrZmRyYnpqMzAxOTEycXBhdXA3MnVpOTMifQ.FLWujZQkT6BeMcSIQz0a8Q'
+}).addTo(map);
+
+var geojsonMarkerOptions = {
+    radius: 4,
+    fillColor: "#ff0000",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
+function onEachFeature(feature, layer) {
+  
+    layer.on('click', function (e) {
+        console.log("layer");
+    console.log(layer);
+      // e = event
+      console.log("feature");
+      console.log(feature);
+      var name=feature.properties.name.slice(0, 8);
+      var id_Picture=feature.properties.name.slice(9, 10);
+      var max=0;
+        console.log("Name:");
+        console.log(name);
+        console.log("id_Picture:");
+        console.log(id_Picture);
+        var time=Math.round(id_Picture*2.2);
+        console.log("Time");
+        console.log(time);
+        var player=document.getElementById('IPlayer');
+        //layer.bindPopup(feature.properties.name);
+        //link to download videos=>https://street.plitter.org/media/Can%20Tho/January_2022/your_path_name.MP4
+        //<iframe allowfullscreen="" frameborder="0" height="315" src="http://www.youtube.com/embed/UkWd0azv3fQ?start=90" width="420"></iframe>
+        if (name.localeCompare("GH010009")==0 )
+        {
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/hgts0sn19oo?start='+time;
+           // loadVideoById("hgts0sn19oo", time, "large")
+            //max= getMax(name);
+           //console.log("Max of Feature of that route:");
+           //console.log(max);
+
+        }
+        else if (name.localeCompare("GH010016")==0)
+        {
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/rf2hyN3Kl9c?start='+time;
+            //loadVideoById("rf2hyN3Kl9c", time, "large")
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+           
+        }
+        else if (name.localeCompare("GH010021")==0)
+        {
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/GQix07cCRSQ?start='+time;
+            //loadVideoById("GQix07cCRSQ", time, "large")
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+           
+        }
+        else if (name.localeCompare("GH010022")==0)
+        {
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/EBMiR8Z3gR4?start='+time;
+           // loadVideoById("EBMiR8Z3gR4", time, "large")
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+           
+        }
+        else if (name.localeCompare("GH010025")==0)
+        {
+           document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/p82Om_A9f7g?start='+time;
+           //loadVideoById("p82Om_A9f7g", time, "large")
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+           
+        }
+        else if (name.localeCompare("GH010027")==0)
+        {
+           document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/XnL-B1rnJfc?start='+time;
+           //loadVideoById("XnL-B1rnJfc", time, "large")
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+            
+        }
+        else if (name.localeCompare("GH010028")==0)
+        {
+           document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/XvpN5_-vgr0?start='+time;
+           //loadVideoById("XvpN5_-vgr0", time, "large")
+           //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+            
+        }
+            
+       
+        //https://youtu.be/JnN-gL3zKHk
+        else if (name.localeCompare("GH030030")==0)
+        {
+            
+            document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/JnN-gL3zKHk?start='+time;
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            //console.log(max);
+           
+        }
+        else 
+        {
+            //document.getElementById("IPlayer").src = 'https://www.youtube.com/embed/hgts0sn19oo'+'?start='+id_Picture;
+            //max= getMax(name);
+            //console.log("Max of Feature of that route:");
+            window.alert('Video not found');
+            document.getElementById("IPlayer").style.display = 'hidden';
+            
+        }   
+        document.getElementById("IPlayer").style.display = 'true';
+       
+        
+    });
+}
+L.geoJSON(geojson_array, {
+    pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, geojsonMarkerOptions);
+    }, 
+    onEachFeature: onEachFeature
+}).addTo(map);
+
+var cfg = {
+  // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+  // if scaleRadius is false it will be the constant radius used in pixels
+  "radius": 2,
+  "maxOpacity": .8,
+  // scales the radius based on map zoom
+  "scaleRadius": true,
+  // if set to false the heatmap uses the global maximum for colorization
+  // if activated: uses the data maximum within the current map boundaries
+  //   (there will always be a red spot with useLocalExtremas true)
+  "useLocalExtrema": true,
+  // which field name in your data represents the latitude - default "lat"
+  latField: 'latitude',
+  // which field name in your data represents the longitude - default "lng"
+  lngField: 'longitude',
+  // which field name in your data represents the data value - default "value"
+  valueField: 'count'
+};
+var testData=getTestData();
+console.log('testData');
+console.log(testData);
+//var heatmapLayer = new HeatmapOverlay(cfg).addTo(map);
+//console.log("geoJSON Array");
+//console.log(geojson_array)
+//heatmapLayer.setData(testData);
+
+function getTestData() {
+    var heatmap_array = [];
+    var newArray=[];
+    var pushData;
+Object.keys(geojsonFeature).forEach((video => {
+   console.log(video);
+   pushData=JSON.stringify(geojsonFeature["geom"]);
+  // newArray=newArray.push(pushData);
+   
+   //
+    var geojson = {"max": 1960, "data": []};
+    console.log(geojson);
+    geojsonFeature[video]["geom"].map((point) => {
+    console.log(point);
+        geojson["data"].push({
+            // "longitude":point["longitude"],
+            // "latitude":point["latitude"],
+            //    "name": point["name"],
+            //    "count": point["count"],
+            //    "Plastic": point["Plastic"],
+            //    "Pile": point["Pile"],
+            //    "Face mask": point["Face mask"],
+            //    "Trash bin": point["Trash bin"],
+           pushData,
+       });
+    });
+    heatmap_array.push(geojson);
+}))
+//console.log("newArray from getTestData");
+//console.log(newArray);
+}
+
+
+</script> 
