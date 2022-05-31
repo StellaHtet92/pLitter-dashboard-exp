@@ -183,7 +183,7 @@ L.geoJSON(geojson_array, {
 var cfg = {
   // radius should be small ONLY if scaleRadius is true (or small radius is intended)
   // if scaleRadius is false it will be the constant radius used in pixels
-  "radius": 2,
+  "radius": 0.1,
   "maxOpacity": .8,
   // scales the radius based on map zoom
   "scaleRadius": true,
@@ -201,41 +201,33 @@ var cfg = {
 var testData=getTestData();
 console.log('testData');
 console.log(testData);
-//var heatmapLayer = new HeatmapOverlay(cfg).addTo(map);
-//console.log("geoJSON Array");
-//console.log(geojson_array)
-//heatmapLayer.setData(testData);
+var heatmapLayer = new HeatmapOverlay(cfg).addTo(map);
+console.log("testData Array");
+console.log(testData)
+heatmapLayer.setData(testData);
 
 function getTestData() {
-    var heatmap_array = [];
-    var newArray=[];
-    var pushData;
+   // var heatmap_array = [];
+var geojson = {"max": 1960, "data": []};
+    
 Object.keys(geojsonFeature).forEach((video => {
-   console.log(video);
-   pushData=JSON.stringify(geojsonFeature["geom"]);
-  // newArray=newArray.push(pushData);
+   console.log(video); 
    
-   //
-    var geojson = {"max": 1960, "data": []};
-    console.log(geojson);
     geojsonFeature[video]["geom"].map((point) => {
-    console.log(point);
+    //console.log('Point from getTestData');
+    //console.log(point);
         geojson["data"].push({
-            // "longitude":point["longitude"],
-            // "latitude":point["latitude"],
-            //    "name": point["name"],
-            //    "count": point["count"],
-            //    "Plastic": point["Plastic"],
-            //    "Pile": point["Pile"],
-            //    "Face mask": point["Face mask"],
-            //    "Trash bin": point["Trash bin"],
-           pushData,
+            "longitude":point["longitude"],
+            "latitude":point["latitude"],
+            "count": point["count"],            
+           
        });
     });
-    heatmap_array.push(geojson);
+    console.log('Geojson from getTestData Function');
+    console.log(geojson); 
+   // heatmap_array.push(geojson);
 }))
-//console.log("newArray from getTestData");
-//console.log(newArray);
+return geojson;
 }
 
 
