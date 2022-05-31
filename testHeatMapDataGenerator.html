@@ -68,10 +68,10 @@ function onEachFeature(feature, layer) {
         console.log("layer");
     console.log(layer);
       // e = event
-      console.log("feature");
-      console.log(feature);
+      console.log("feature name's length");
+      console.log(feature.properties.name.length);
       var name=feature.properties.name.slice(0, 8);
-      var id_Picture=feature.properties.name.slice(9, 10);
+      var id_Picture=feature.properties.name.slice(9, feature.properties.name.length-4);
       var max=0;
         console.log("Name:");
         console.log(name);
