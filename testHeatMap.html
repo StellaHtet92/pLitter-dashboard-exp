@@ -55,12 +55,12 @@
 }).addTo(map);
 
 var geojsonMarkerOptions = {
-    radius: 4,
+    radius: 2,
     fillColor: "#ff0000",
     color: "#000",
     weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
+    opacity: 0.5,
+    fillOpacity: 0.5
 };
 function onEachFeature(feature, layer) {
   
@@ -180,11 +180,12 @@ L.geoJSON(geojson_array, {
     onEachFeature: onEachFeature
 }).addTo(map);
 
+
 var cfg = {
   // radius should be small ONLY if scaleRadius is true (or small radius is intended)
   // if scaleRadius is false it will be the constant radius used in pixels
-  "radius": 2,
-  "maxOpacity": .8,
+  "radius": 0.0001,
+  "maxOpacity": .9,
   // scales the radius based on map zoom
   "scaleRadius": true,
   // if set to false the heatmap uses the global maximum for colorization
@@ -198,11 +199,14 @@ var cfg = {
   // which field name in your data represents the data value - default "value"
   valueField: 'count'
 };
-
+var testData=getTestData();
+console.log('testData');
+console.log(testData);
 var heatmapLayer = new HeatmapOverlay(cfg).addTo(map);
-//console.log("geoJSON Array");
-//console.log(geojson_array)
+console.log("testData Array");
+console.log(testData)
 heatmapLayer.setData(testData);
+
 
 function getMax(name) {
     var max = -10000000;
