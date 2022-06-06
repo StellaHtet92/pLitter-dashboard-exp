@@ -180,11 +180,11 @@ L.geoJSON(geojson_array, {
     onEachFeature: onEachFeature
 }).addTo(map);
 
-var cfg = {
+var cfgCount = {
   // radius should be small ONLY if scaleRadius is true (or small radius is intended)
   // if scaleRadius is false it will be the constant radius used in pixels
-  "radius": 0.1,
-  "maxOpacity": .8,
+  "radius": 0.0001,
+  "maxOpacity": .9,
   // scales the radius based on map zoom
   "scaleRadius": true,
   // if set to false the heatmap uses the global maximum for colorization
@@ -198,13 +198,101 @@ var cfg = {
   // which field name in your data represents the data value - default "value"
   valueField: 'count'
 };
+var cfgPlastic = {
+  // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+  // if scaleRadius is false it will be the constant radius used in pixels
+  "radius": 0.0001,
+  "maxOpacity": .9,
+  // scales the radius based on map zoom
+  "scaleRadius": true,
+  // if set to false the heatmap uses the global maximum for colorization
+  // if activated: uses the data maximum within the current map boundaries
+  //   (there will always be a red spot with useLocalExtremas true)
+  "useLocalExtrema": true,
+  // which field name in your data represents the latitude - default "lat"
+  latField: 'latitude',
+  // which field name in your data represents the longitude - default "lng"
+  lngField: 'longitude',
+  // which field name in your data represents the data value - default "value"
+  valueField: 'Plastic'
+};
+var cfgPile = {
+  // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+  // if scaleRadius is false it will be the constant radius used in pixels
+  "radius": 0.0001,
+  "maxOpacity": .9,
+  // scales the radius based on map zoom
+  "scaleRadius": true,
+  // if set to false the heatmap uses the global maximum for colorization
+  // if activated: uses the data maximum within the current map boundaries
+  //   (there will always be a red spot with useLocalExtremas true)
+  "useLocalExtrema": true,
+  // which field name in your data represents the latitude - default "lat"
+  latField: 'latitude',
+  // which field name in your data represents the longitude - default "lng"
+  lngField: 'longitude',
+  // which field name in your data represents the data value - default "value"
+  valueField: 'Pile'
+};
+var cfgFaceMask = {
+  // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+  // if scaleRadius is false it will be the constant radius used in pixels
+  "radius": 0.0001,
+  "maxOpacity": .9,
+  // scales the radius based on map zoom
+  "scaleRadius": true,
+  // if set to false the heatmap uses the global maximum for colorization
+  // if activated: uses the data maximum within the current map boundaries
+  //   (there will always be a red spot with useLocalExtremas true)
+  "useLocalExtrema": true,
+  // which field name in your data represents the latitude - default "lat"
+  latField: 'latitude',
+  // which field name in your data represents the longitude - default "lng"
+  lngField: 'longitude',
+  // which field name in your data represents the data value - default "value"
+  valueField: 'Face mask'
+};
+var cfgTrashBin = {
+  // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+  // if scaleRadius is false it will be the constant radius used in pixels
+  "radius": 0.0001,
+  "maxOpacity": .9,
+  // scales the radius based on map zoom
+  "scaleRadius": true,
+  // if set to false the heatmap uses the global maximum for colorization
+  // if activated: uses the data maximum within the current map boundaries
+  //   (there will always be a red spot with useLocalExtremas true)
+  "useLocalExtrema": true,
+  // which field name in your data represents the latitude - default "lat"
+  latField: 'latitude',
+  // which field name in your data represents the longitude - default "lng"
+  lngField: 'longitude',
+  // which field name in your data represents the data value - default "value"
+  valueField: 'Trash bin'
+};
 var testData=getTestData();
-console.log('testData');
-console.log(testData);
-var heatmapLayer = new HeatmapOverlay(cfg).addTo(map);
-console.log("testData Array");
-console.log(testData)
-heatmapLayer.setData(testData);
+//console.log('testData');
+//console.log(testData);
+var heatmapLayerCount = new HeatmapOverlay(cfgCount);
+var heatmapLayerPlastic = new HeatmapOverlay(cfgPlastic);
+var heatmapLayerPile = new HeatmapOverlay(cfgPile);
+var heatmapLayerFaceMask = new HeatmapOverlay(cfgFaceMask);
+var heatmapLayerTrashBin = new HeatmapOverlay(cfgTrashBin);
+L.control.layers({},{
+    
+    "Count": heatmapLayerCount, 
+    "Plastic": heatmapLayerPlastic,
+    "Pile":heatmapLayerPile,
+    "Face mask":heatmapLayerFaceMask,
+    "Trash Bin":heatmapLayerTrashBin
+},{collapsed:false}).addTo(map);
+//console.log("testData Array");
+//console.log(testData)
+heatmapLayerCount.setData(testData);
+heatmapLayerPlastic.setData(testData);
+heatmapLayerPile.setData(testData);
+heatmapLayerFaceMask.setData(testData);
+heatmapLayerTrashBin.setData(testData);
 
 function getTestData() {
    // var heatmap_array = [];
@@ -217,9 +305,14 @@ Object.keys(geojsonFeature).forEach((video => {
     //console.log('Point from getTestData');
     //console.log(point);
         geojson["data"].push({
+            "name": point["name"],
             "longitude":point["longitude"],
             "latitude":point["latitude"],
-            "count": point["count"],            
+            "count": point["count"],     
+            "Plastic": point["Plastic"],
+            "Pile": point["Pile"],
+            "Face mask": point["Face mask"],
+            "Trash bin": point["Trash bin"],       
            
        });
     });
@@ -229,6 +322,4 @@ Object.keys(geojsonFeature).forEach((video => {
 }))
 return geojson;
 }
-
-
 </script> 
