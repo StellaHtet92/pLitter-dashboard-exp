@@ -163,7 +163,7 @@
       
         // transform data to latlngs
         console.log("Data length from leaflet-heatmap");
-        console.log(data.length);
+        console.log(data.data.length);
         var data = data.data;
         var len = data.length;
         var d = [];

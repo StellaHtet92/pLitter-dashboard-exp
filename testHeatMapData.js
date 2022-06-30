@@ -11,7 +11,7 @@ Object.keys(geojsonFeature).forEach((video => {
        geojson["data"].push({
            "longitude":point["longitude"],
            "latitude":point["latitude"],
-           "count": point["count"],            
+           "count": point["count"]       
           
       });
    });

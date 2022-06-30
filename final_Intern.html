@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>PLitter Page</title>
+        <link rel="stylesheet" href="style.css">
+        
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+         integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+         crossorigin=""/>
+    </head>
+    <body>
+        <div id="container">
+            <div class="sidenav">
+                <p>Layer Selection</p>
+                <a href="#">
+                    
+                    <input class="form-check-input" type="checkbox" value="" id="1" onchange="processCheck(this)">
+                    <span class="icon"><i class="fas fa-layer-group" aria-hidden="true"></i></span>
+                        <label class="form-check-label" for="1">
+                            Heat Map
+                        </label>
+                   
+                </a>
+                <a href="#">
+                    <input class="form-check-input" type="checkbox" value="" id="2" checked onchange="processCheck(this)">
+                    <span class="icon"><i class="fas fa-layer-group" aria-hidden="true"></i></span>
+                        <label class="form-check-label" for="2">
+                            Videos
+                        </label>
+                </a>
+                <a href="#">
+                    <input class="form-check-input" type="checkbox" value="" id="3" onchange="processCheck(this)">
+                    <span class="icon"><i class="fas fa-layer-group" aria-hidden="true"></i></span>
+                        <label class="form-check-label" for="3">
+                            Polyline
+                        </label>
+                </a>
+            </div>
+            <div id="map">
+            </div>
+            <iframe id="IPlayer" width="420" height="315" src="" display="none"> <!-- base url: https://www.youtube.com/embed/your_video_name-->
+            </iframe>
+        </div>
+    </body>
+</html>
+ <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+   crossorigin="">
+</script>
+<script type="text/javascript"  src="https://unpkg.com/leaflet.vectorgrid@1.2.0"></script>
+<!--<script src="testHeatMapData.js"></script>-->
+<!--geojson1 is the selection of geojson features which have uploaded youtube-video-->
+<script src='leaflet-heatmap/heatmap.js'></script>
+<script src='leaflet-heatmap/leaflet-heatmap.js'></script>
+<script src='geojson1.js'></script>
+<script src='convertplitter2geojson.js'></script>
+<script src="testHeatMapData.js"></script>
+<script src="https://kit.fontawesome.com/be439300a2.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="mainJS.js"></script>
+<script>
+    var cfg = {
+    // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+    // if scaleRadius is false it will be the constant radius used in pixels
+    "radius": 0.0001,
+    "maxOpacity": .9,
+    // scales the radius based on map zoom
+    "scaleRadius": true,
+    // if set to false the heatmap uses the global maximum for colorization
+    // if activated: uses the data maximum within the current map boundaries
+    //   (there will always be a red spot with useLocalExtremas true)
+    "useLocalExtrema": true,
+    // which field name in your data represents the latitude - default "lat"
+    latField: 'latitude',
+    // which field name in your data represents the longitude - default "lng"
+    lngField: 'longitude',
+    // which field name in your data represents the data value - default "value"
+    valueField: 'count'
+  };
+  var testData=getTestData();
+  console.log('testData');
+  console.log(testData);
+  var heatmapLayer = new HeatmapOverlay(cfg).addTo(map);
+  console.log("testData Array");
+  console.log(testData)
+  heatmapLayer.setData(testData);
+</script>

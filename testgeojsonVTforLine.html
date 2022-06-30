@@ -164,12 +164,13 @@ function onEachFeature(feature, layer) {
         
     });
 }
-/*L.geoJSON(geojson_array, {
+L.geoJSON(geojson_array, {
     pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, geojsonMarkerOptions);
     }, 
     onEachFeature: onEachFeature
-}).addTo(map);*/
+}).addTo(map);
+
 </script>
 
 <script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script>
@@ -188,5 +189,4 @@ function onEachFeature(feature, layer) {
 };
 
 var vtLayer = L.geoJson.vt(geoJSONFeaturesForVectorGrid, options).addTo(map);
-
 </script>

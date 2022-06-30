@@ -169,8 +169,37 @@ L.geoJSON(geojson_array, {
     }, 
     onEachFeature: onEachFeature
 }).addTo(map);
+
 //code from https://gis.stackexchange.com/questions/29833/drawing-polyline-in-leaflet
-var pointA = new L.LatLng(10.0042388, 105.7902111);
+function getPointList(geojson_array) {
+    /*console.log('geojson_array');
+    console.log(geojson_array);*/
+    var point,smallpolyline,i,j,lat,lng,point;
+    var polylineList=[];
+    var pointList=[];
+    var colours=['#800026','#E31A1C','#FEB24C','#B2FE4C','#FFEDA0','#9FA8DA']
+    for (i=0 ; i<geojson_array.length ; i++) {
+        pointList=[];
+        for (j=0; j<geojson_array[i].features.length; j++)
+        {
+            lat=geojson_array[i].features[j].geometry.coordinates[0];
+            lng=geojson_array[i].features[j].geometry.coordinates[1];
+            point=new L.LatLng(lng,lat);
+            pointList.push(point);
+            /*console.log('point');
+            console.log(point);*/
+        }
+    smallpolyline = new L.Polyline(pointList, {
+    color: colours[i],
+    weight: 5,
+    opacity: 1,
+    smoothFactor: 1
+    });
+    polylineList.push(smallpolyline);
+    }    
+    return polylineList;
+}
+/*var pointA = new L.LatLng(10.0042388, 105.7902111);
 var pointB = new L.LatLng(10.0042381,105.79020919999999);
 var pointC= new L.LatLng(10.0042419,105.7902157);
 var pointD= new L.LatLng(10.0042586,105.7902473);
@@ -180,15 +209,18 @@ var pointG= new L.LatLng(10.0043244,105.7903349);
 var pointH= new L.LatLng(10.0043896,105.7904202);
 var pointI= new L.LatLng(10.0044124,105.7904547);
 var pointJ= new L.LatLng(10.0044526,105.79050339999999);
-var pointList = [pointA, pointB, pointC,pointD,pointE,pointF,pointG,pointH,pointI,pointJ];
-
-var firstpolyline = new L.Polyline(pointList, {
+var pointList = [pointA, pointB, pointC,pointD,pointE,pointF,pointG,pointH,pointI,pointJ];*/
+//var pointList=getPointList(geojson_array);
+/*var firstpolyline = new L.Polyline(pointList, {
     color: 'yellow',
     weight: 10,
     opacity: 1,
     smoothFactor: 1
 });
-firstpolyline.addTo(map);
-
-
+firstpolyline.addTo(map);*/
+var polylineList=getPointList(geojson_array);
+for (var i=0; i<polylineList.length; i++)
+{
+    polylineList[i].addTo(map);
+}
 </script>
