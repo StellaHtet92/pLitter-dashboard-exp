@@ -40,8 +40,9 @@
             </div>
             <div id="map">
             </div>
-            <iframe id="IPlayer" width="420" height="315" src="" display="none"> <!-- base url: https://www.youtube.com/embed/your_video_name-->
-            </iframe>
+          <!--<iframe id="IPlayer" width="420" height="315" src="" display="none"> <!-- base url: https://www.youtube.com/embed/your_video_name-->
+           <!--</iframe>--> 
+           <div id="IPlayer"></div>
         </div>
     </body>
 </html>
@@ -60,30 +61,7 @@
 <script src="testHeatMapData.js"></script>
 <script src="https://kit.fontawesome.com/be439300a2.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="mainJS.js"></script>
+<script type="text/javascript" src="iFrameFunctions.js"></script>
 <script>
-    var cfg = {
-    // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-    // if scaleRadius is false it will be the constant radius used in pixels
-    "radius": 0.0001,
-    "maxOpacity": .9,
-    // scales the radius based on map zoom
-    "scaleRadius": true,
-    // if set to false the heatmap uses the global maximum for colorization
-    // if activated: uses the data maximum within the current map boundaries
-    //   (there will always be a red spot with useLocalExtremas true)
-    "useLocalExtrema": true,
-    // which field name in your data represents the latitude - default "lat"
-    latField: 'latitude',
-    // which field name in your data represents the longitude - default "lng"
-    lngField: 'longitude',
-    // which field name in your data represents the data value - default "value"
-    valueField: 'count'
-  };
-  var testData=getTestData();
-  console.log('testData');
-  console.log(testData);
-  var heatmapLayer = new HeatmapOverlay(cfg).addTo(map);
-  console.log("testData Array");
-  console.log(testData)
-  heatmapLayer.setData(testData);
+ 
 </script>
